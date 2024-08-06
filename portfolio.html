@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfolio | Futuristic Tech Company</title>
+    <meta name="description" content="View the portfolio of projects completed by Futuristic Tech Company.">
+    <meta name="keywords" content="portfolio, projects, tech, futuristic">
+    <meta name="author" content="Futuristic Tech Company">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/DrawSVGPlugin.min.js"></script>
+    <!-- Alpine.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .nav-link:hover {
+            color: #ffcc00;
+        }
+        .tech-border {
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, hsl(180, 100%, 50%), #bd65d3cc) 1;
+        }
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background: url('https://via.placeholder.com/800x400') no-repeat center center;
+            background-size: cover;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="parallax-bg"></div>
+    <header class="bg-gray-800 text-white p-4 fixed w-full z-10 tech-border">
+        <h1 class="text-3xl font-bold">Futuristic Tech Company</h1>
+        <nav aria-label="Main Navigation">
+            <a href="index.html" class="mr-4 nav-link">Home</a>
+            <a href="about.html" class="mr-4 nav-link">About Us</a>
+            <a href="services.html" class="mr-4 nav-link">Services</a>
+            <a href="portfolio.html" class="mr-4 nav-link">Portfolio</a>
+            <a href="blog.html" class="mr-4 nav-link">Blog</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+    </header>
+    <main class="p-4 pt-20">
+        <section class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-4">Our Portfolio</h2>
+            <p class="mb-8">Check out some of our latest projects.</p>
+            <div id="portfolio-animation" class="mb-8">
+                <img src="https://via.placeholder.com/800x400" alt="Portfolio" class="mx-auto tech-border" loading="lazy">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="tech-border p-4">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 1" class="mb-4">
+                    <h3 class="text-2xl font-bold mb-2">Project 1</h3>
+                    <p>A brief description of Project 1.</p>
+                </div>
+                <div class="tech-border p-4">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 2" class="mb-4">
+                    <h3 class="text-2xl font-bold mb-2">Project 2</h3>
+                    <p>A brief description of Project 2.</p>
+                </div>
+                <div class="tech-border p-4">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 3" class="mb-4">
+                    <h3 class="text-2xl font-bold mb-2">Project 3</h3>
+                    <p>A brief description of Project 3.</p>
+                </div>
+                <!-- Additional projects can be added here -->
+            </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-white p-4 mt-8 tech-border">
+        <p class="text-center">&copy; 2024 Futuristic Tech Company. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from("#portfolio-animation img", { duration: 2, opacity: 0, y: -50, ease: "power2.out" });
+            gsap.from("header", { duration: 1.5, opacity: 0, y: -100, ease: "power2.out" });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseover', () => {
+                    gsap.to(link, { duration: 0.5, scale: 1.2, ease: "power2.out" });
+                });
+                link.addEventListener('mouseout', () => {
+                    gsap.to(link, { duration: 0.5, scale: 1, ease: "power2.out" });
+                });
+            });
+
+            // Parallax effect
+            window.addEventListener('scroll', function() {
+                const parallax = document.querySelector('.parallax-bg');
+                let scrollPosition = window.pageYOffset;
+                parallax.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+            });
+
+            // Innovative animations
+            gsap.from("h2", { duration: 1.5, opacity: 0, scale: 0.8, ease: "elastic.out(1, 0.3)", delay: 0.5 });
+            gsap.from("p", { duration: 1.5, opacity: 0, x: 50, stagger: 0.2, ease: "power2.out", delay: 0.7 });
+            gsap.from(".grid div", { duration: 1.5, opacity: 0, scale: 0.8, stagger: 0.2, ease: "power2.out", delay: 0.7 });
+        });
+    </script>
+</body>
+</html>

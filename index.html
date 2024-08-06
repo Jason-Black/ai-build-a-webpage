@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Futuristic Tech Company</title>
+    <meta name="description" content="Futuristic Tech Company specializes in advertising, video editing, and marketing with a touch of the future.">
+    <meta name="keywords" content="advertising, video editing, marketing, tech, futuristic, company">
+    <meta name="author" content="Futuristic Tech Company">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/DrawSVGPlugin.min.js"></script>
+    <!-- Alpine.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/cdn.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .nav-link:hover {
+            color: #ffcc00;
+        }
+        .tech-border {
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #ffcc00, #00ccff) 1;
+        }
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background: url('https://via.placeholder.com/800x400') no-repeat center center;
+            background-size: cover;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+        #interactive-svg {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="parallax-bg"></div>
+    <header class="bg-gray-800 text-white p-4 fixed w-full z-10 tech-border">
+        <h1 class="text-3xl font-bold">Futuristic Tech Company</h1>
+        <nav aria-label="Main Navigation">
+            <a href="index.html" class="mr-4 nav-link">Home</a>
+            <a href="about.html" class="mr-4 nav-link">About Us</a>
+            <a href="services.html" class="mr-4 nav-link">Services</a>
+            <a href="portfolio.html" class="mr-4 nav-link">Portfolio</a>
+            <a href="blog.html" class="mr-4 nav-link">Blog</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+    </header>
+    <main class="p-4 pt-20">
+        <section class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-4">Welcome to Our Futuristic Company</h2>
+            <p class="mb-8">We specialize in advertising, video editing, and marketing with a touch of the future.</p>
+            <div id="hero-animation" class="mb-8">
+                <img src="https://via.placeholder.com/800x400" alt="Futuristic Tech" class="mx-auto tech-border" loading="lazy">
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Our Services</h3>
+                <p>Explore our innovative services that will take your business to the next level.</p>
+                <svg id="interactive-svg" viewBox="0 0 100 100">
+                    <circle id="circle" cx="50" cy="50" r="40" stroke="#00ccff" stroke-width="4" fill="none"/>
+                </svg>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-white p-4 mt-8 tech-border">
+        <p class="text-center">&copy; 2024 Futuristic Tech Company. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from("#hero-animation img", { duration: 2, opacity: 0, y: -50, ease: "power2.out" });
+            gsap.from("header", { duration: 1.5, opacity: 0, y: -100, ease: "power2.out" });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseover', () => {
+                    gsap.to(link, { duration: 0.5, scale: 1.2, ease: "power2.out" });
+                });
+                link.addEventListener('mouseout', () => {
+                    gsap.to(link, { duration: 0.5, scale: 1, ease: "power2.out" });
+                });
+            });
+
+            // Parallax effect
+            window.addEventListener('scroll', function() {
+                const parallax = document.querySelector('.parallax-bg');
+                let scrollPosition = window.pageYOffset;
+                parallax.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+            });
+
+            // SVG animation
+            gsap.fromTo("#circle", {drawSVG: "0%"}, {duration: 2, drawSVG: "100%", ease: "power1.inOut"});
+            
+            const circle = document.getElementById("circle");
+
+            gsap.set(circle, { scale: 0.5, transformOrigin: "center" });
+
+            circle.addEventListener("mouseover", () => {
+                gsap.to(circle, { duration: 0.5, scale: 1, ease: "elastic.out(1, 0.3)" });
+            });
+
+            circle.addEventListener("mouseout", () => {
+                gsap.to(circle, { duration: 0.5, scale: 0.5, ease: "elastic.out(1, 0.3)" });
+            });
+
+            // Innovative animations
+            gsap.from("h2", { duration: 1.5, opacity: 0, scale: 0.8, ease: "elastic.out(1, 0.3)", delay: 0.5 });
+            gsap.from("p", { duration: 1.5, opacity: 0, x: 50, stagger: 0.2, ease: "power2.out", delay: 0.7 });
+        });
+    </script>
+</body>
+</html>
